@@ -12,20 +12,17 @@ import java.util.List;
 @WebServlet(name="ServletTest",urlPatterns = "/test")
 
 public class Servlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String result=req.getParameter("Type");
-        List<String> x =new ArrayList<>();
-        if(result.equals("A"))
-            x.add("A");
-        else if(result.equals("B"))
-            x.add("B");
-        else
-            x.add("C");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        String userName=req.getParameter("userName");
 
-        req.setAttribute("brands", x);
-        RequestDispatcher view = req.getRequestDispatcher("result.html");
-        view.forward(req, resp);
+
+        String greetings = "Hello " + userName;
+
+        resp.setContentType("text/plain");
+        resp.getWriter().write(greetings);
+
     }
 }
